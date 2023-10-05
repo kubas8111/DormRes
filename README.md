@@ -8,8 +8,6 @@ Description of project...
 - Recommended modules
 - Installation
 - Configuration
-- Troubleshooting
-- FAQ
 - Maintainers
 
 
