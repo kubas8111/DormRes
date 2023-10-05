@@ -1,11 +1,10 @@
 # Dorm Reservation
 
-Description of project...
+This project is about selecting a dormitory, and then booking a room in it.
 
 ## Table of contents
 
 - Requirements
-- Recommended modules
 - Installation
 - Configuration
 - Maintainers
