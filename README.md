@@ -13,14 +13,15 @@ This project is about selecting a dormitory, and then booking a room in it.
 ## Requirements
 
 This module requires the following modules:
-- PHP server, for example [Apache](google.com)
+- PHP server, for example Apache
 - Database server, for example MySQL.
 - or you can also use Docker container for everything
 
 
 ## Installation
 
-Install as you would normally install a contributed Docker
+- You can get PHP server and MySQL server installing [XAMPP](https://www.apachefriends.org/pl/index.html)
+- You can download Docker from [here](https://www.docker.com/products/docker-desktop/)
 
 ## Configuration
 
