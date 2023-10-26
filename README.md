@@ -1,4 +1,4 @@
-# Dorm Reservation
+# Dorm Res
 
 This project is about selecting a dormitory, and then booking a room in it.
 
