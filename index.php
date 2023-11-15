@@ -1,5 +1,5 @@
 <?php
 
-echo "Hi there";
+echo "Paweł krul ma małego siurka";
 
 ?>
