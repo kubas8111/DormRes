@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../css/style_main.css">
+    <link rel="stylesheet" type="text/css" href="public/css/style_main.css">
     <title>LOGIN PAGE</title>
 </head>
 
@@ -9,7 +9,7 @@
     <div class="base-container">
         <nav>
             <div class="logo">
-                <img src="../img/logo.svg">
+                <img src="public/img/logo.svg">
             </div>
             <div class="list">
                 <ul>
@@ -42,14 +42,12 @@
         </nav>
         <main>
             <section class="container">
-                <select>
-                    <option>jacek</option>
-                    <option>maciek</option>
-                    <option>szynka</option>
-                </select>
-                <div class="info">
-                    jacek
-                </div>
+                <h2>
+                    Informacje
+                </h2>
+                <p>
+                    hujhujhujhuhjhujhhuhjuhjhuhhuhjh uhjhh uh jhu huhj huhjh uh jh uhj
+                </p>
             </section>
         </main>
     </div>
