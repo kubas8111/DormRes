@@ -6,4 +6,8 @@ class SecurityController extends AppController {
     public function login() {
         
     }
+
+    public function register() {
+        
+    }
 }

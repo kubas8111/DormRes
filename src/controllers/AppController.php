@@ -1,7 +1,6 @@
 <?php
 
 class AppController {
-<<<<<<< HEAD
     private $request;
 
     public function __construct()
@@ -27,22 +26,10 @@ class AppController {
         if(file_exists($templatePath)){
             extract($variables);
             
-=======
-
-    protected function render(string $template = null) {
-        $templatePath = 'public/views/'.$template.'.html';
-        $output = 'File not found'; 
-
-        if(file_exists($templatePath)) {
->>>>>>> d27064f49e76d0335c7a4faf191f81190ed0894a
             ob_start();
             include $templatePath;
             $output = ob_get_clean();
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> d27064f49e76d0335c7a4faf191f81190ed0894a
         print $output;
     }
 }
