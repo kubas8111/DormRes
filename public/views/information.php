@@ -32,7 +32,7 @@
             </div>
             <div class="account">
                 <div class="user">
-                    <img src="../img/user.png">
+                    <img src="public/img/user.png">
                     <p>Witaj [name]</p>
                 </div>
                 <div class="logout">
