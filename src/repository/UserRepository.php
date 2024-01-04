@@ -19,11 +19,11 @@ class UserRepository extends Repository {
             $user['UserID'],
             $user['Login'],
             $user['Password'],
-            $user['IsAdmin'],
+            $user['IsAdmin']
         );
     }
 
     public function addUser(string $email, string $password): void {
-
+        
     }
 }

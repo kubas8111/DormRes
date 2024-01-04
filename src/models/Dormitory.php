@@ -7,7 +7,7 @@ class Dormitory {
     private $postcode;
     private $telephone;
 
-    public function __construct($dormitoryID, $address, $city, $postcode, $telephone) {
+    public function __construct(int $dormitoryID, string $address, string $city, string $postcode, string $telephone) {
         $this->dormitoryID = $dormitoryID;
         $this->address = $address;
         $this->city = $city;
@@ -15,43 +15,43 @@ class Dormitory {
         $this->telephone = $telephone;
     }
 
-    public function getDormitoryID() {
+    public function getDormitoryID(): int {
         return $this->dormitoryID;
     }
 
-    public function setDormitoryID($dormitoryID) {
+    public function setDormitoryID(int $dormitoryID): void {
         $this->dormitoryID = $dormitoryID;
     }
 
-    public function getAddress() {
+    public function getAddress(): string {
         return $this->address;
     }
 
-    public function setAddress($address) {
+    public function setAddress(string $address): void {
         $this->address = $address;
     }
 
-    public function getCity() {
+    public function getCity(): string {
         return $this->city;
     }
 
-    public function setCity($city) {
+    public function setCity(string $city): void {
         $this->city = $city;
     }
 
-    public function getPostcode() {
+    public function getPostcode(): string {
         return $this->postcode;
     }
 
-    public function setPostcode($postcode) {
+    public function setPostcode(string $postcode): void {
         $this->postcode = $postcode;
     }
 
-    public function getTelephone() {
+    public function getTelephone(): string {
         return $this->telephone;
     }
 
-    public function setTelephone($telephone) {
+    public function setTelephone(string $telephone): void {
         $this->telephone = $telephone;
     }
 }

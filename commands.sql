@@ -5,7 +5,7 @@
 CREATE TABLE IF NOT EXISTS public."User"
 (
     "UserID" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
-    "Login" text COLLATE pg_catalog."default",
+    "Email" text COLLATE pg_catalog."default",
     "Password" text COLLATE pg_catalog."default",
     "isAdmin" boolean,
     CONSTRAINT "User_pkey" PRIMARY KEY ("UserID")
@@ -15,18 +15,17 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public."User"
     OWNER to root;
-
+    
 -- Table: public.UserData
 
 -- DROP TABLE IF EXISTS public."UserData";
 
 CREATE TABLE IF NOT EXISTS public."UserData"
 (
-    "UserID" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    "UserID" integer NOT NULL,
     "Name" text COLLATE pg_catalog."default",
     "Surname" text COLLATE pg_catalog."default",
     "Telephone" text COLLATE pg_catalog."default",
-    "Email" text COLLATE pg_catalog."default",
     "StudentCardID" text COLLATE pg_catalog."default",
     CONSTRAINT "UserData_pkey" PRIMARY KEY ("UserID"),
     CONSTRAINT user_id_fk FOREIGN KEY ("UserID")

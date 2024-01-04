@@ -6,42 +6,42 @@ class Reservation {
     private $roomID;
     private $time;
 
-    public function __construct($reservationID, $userID, $roomID, $time) {
+    public function __construct(int $reservationID, int $userID, int $roomID, string $time) {
         $this->reservationID = $reservationID;
         $this->userID = $userID;
         $this->roomID = $roomID;
         $this->time = $time;
     }
 
-    public function getReservationID() {
+    public function getReservationID(): int {
         return $this->reservationID;
     }
 
-    public function setReservationID($reservationID) {
+    public function setReservationID(int $reservationID): void {
         $this->reservationID = $reservationID;
     }
 
-    public function getUserID() {
+    public function getUserID(): int {
         return $this->userID;
     }
 
-    public function setUserID($userID) {
+    public function setUserID(int $userID): void {
         $this->userID = $userID;
     }
 
-    public function getRoomID() {
+    public function getRoomID(): int {
         return $this->roomID;
     }
 
-    public function setRoomID($roomID) {
+    public function setRoomID(int $roomID): void {
         $this->roomID = $roomID;
     }
 
-    public function getTime() {
+    public function getTime(): string {
         return $this->time;
     }
 
-    public function setTime($time) {
+    public function setTime(string $time): void {
         $this->time = $time;
     }
 }
