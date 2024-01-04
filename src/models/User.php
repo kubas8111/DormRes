@@ -6,42 +6,42 @@ class User {
     private $password;
     private $isAdmin;
 
-    public function __construct(int $userID, string $login, string $password, bool $isAdmin) {
+    public function __construct($userID, $login, $password, $isAdmin) {
         $this->userID = $userID;
         $this->login = $login;
         $this->password = $password;
         $this->isAdmin = $isAdmin;
     }
 
-    public function getUserID(): int {
+    public function getUserID() {
         return $this->userID;
     }
 
-    public function setUserID(int $userID): void {
+    public function setUserID($userID) {
         $this->userID = $userID;
     }
 
-    public function getLogin(): string {
+    public function getLogin() {
         return $this->login;
     }
 
-    public function setLogin(string $login): void {
+    public function setLogin($login) {
         $this->login = $login;
     }
 
-    public function getPassword(): string {
+    public function getPassword() {
         return $this->password;
     }
 
-    public function setPassword(string $password): void {
+    public function setPassword($password) {
         $this->password = $password;
     }
 
-    public function isAdmin(): bool {
+    public function getIsAdmin() {
         return $this->isAdmin;
     }
 
-    public function setAdmin(bool $isAdmin): void {
+    public function setIsAdmin($isAdmin) {
         $this->isAdmin = $isAdmin;
     }
 }
