@@ -62,4 +62,16 @@ class ReservationRepository extends Repository {
 
         return $details;
     }
+
+    public function deleteReservation(int $userID): void {
+        try {
+            $stmt = $this->database->connect()->prepare('
+                DELETE FROM Reservation WHERE UserID = :userID
+            ');
+            $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            die("Error deleting reservation: " . $e->getMessage());
+        }
+    }
 }
