@@ -106,3 +106,18 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public."Reservation"
     OWNER to root;
+
+
+-- View UserDetailsView
+
+CREATE VIEW UserDetailsView AS
+SELECT 
+    U.UserID, 
+    U.Email, 
+    UD.Name,
+    UD.Surname,
+    UD.Telephone,
+    UD.StudentCardID
+FROM "User" U
+JOIN UserData UD ON U.UserID = UD.UserID
+WHERE U.IsAdmin = false;

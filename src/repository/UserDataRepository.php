@@ -24,7 +24,17 @@ class UserDataRepository extends Repository {
         );
     }
 
-    public function addUserData(string $email, string $password): void {
-        
+    public function getUserDataFromView(int $userID): ?array {
+        try {
+            $stmt = $this->database->connect()->prepare('
+                SELECT * FROM UserDetailsView WHERE UserID = :userID
+            ');
+            $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+            $stmt->execute();
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            die("Error getting user data from view: " . $e->getMessage());
+        }
     }
 }

@@ -25,7 +25,7 @@ class ReservationRepository extends Repository {
 
     public function getReservationByUserID(int $userID): ?Reservation {
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM Reservation WHERE UserID = :userID LIMIT 1
+            SELECT * FROM Reservation WHERE UserID = :userID
         ');
         $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
         $stmt->execute();
