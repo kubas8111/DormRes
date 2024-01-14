@@ -4,6 +4,37 @@ require_once 'Repository.php';
 require_once __DIR__.'/../models/Room.php';
 
 class RoomRepository extends Repository {
+    public function addRoom(string $roomCode, int $dormitoryID, int $type, int $floor): void {
+        try {
+            $stmt = $this->database->connect()->prepare('
+                INSERT INTO Room (RoomCode, DormitoryID, Type, Floor)
+                VALUES (:roomCode, :dormitoryID, :type, :floor)
+            ');
+
+            $stmt->bindParam(':roomCode', $roomCode, PDO::PARAM_STR);
+            $stmt->bindParam(':dormitoryID', $dormitoryID, PDO::PARAM_INT);
+            $stmt->bindParam(':type', $type, PDO::PARAM_INT);
+            $stmt->bindParam(':floor', $floor, PDO::PARAM_INT);
+
+            $stmt->execute();
+        } catch (PDOException $e) {
+            die("Error adding room: " . $e->getMessage());
+        }
+    }
+
+    public function deleteRoom(int $roomID): void {
+        try {
+            $stmt = $this->database->connect()->prepare('
+                DELETE FROM Room WHERE RoomID = :roomID
+            ');
+
+            $stmt->bindParam(':roomID', $roomID, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            die("Error deleting room: " . $e->getMessage());
+        }
+    }
+
     public function getRoom(int $roomID): ?Room {
         $stmt = $this->database->connect()->prepare('
             SELECT * FROM Room WHERE RoomID = :roomID

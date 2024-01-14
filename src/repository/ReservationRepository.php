@@ -4,6 +4,23 @@ require_once 'Repository.php';
 require_once __DIR__.'/../models/Reservation.php';
 
 class ReservationRepository extends Repository {
+    public function addReservation(int $userID, int $roomID, string $time): void {
+        try {
+            $stmt = $this->database->connect()->prepare('
+                INSERT INTO Reservation (UserID, RoomID, Time)
+                VALUES (:userID, :roomID, :time)
+            ');
+
+            $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+            $stmt->bindParam(':roomID', $roomID, PDO::PARAM_INT);
+            $stmt->bindParam(':time', $time, PDO::PARAM_STR);
+
+            $stmt->execute();
+        } catch (PDOException $e) {
+            die("Error adding reservation: " . $e->getMessage());
+        }
+    }
+
     public function getReservation(int $reservationID): ?Reservation {
         $stmt = $this->database->connect()->prepare('
             SELECT * FROM Reservation WHERE ReservationID = :reservationID

@@ -58,4 +58,29 @@ class UserRepository extends Repository {
             die("Error adding user with data: " . $e->getMessage());
         }
     }
+
+    public function deleteUser(int $userID): void {
+        try {
+            $this->database->connect()->beginTransaction();
+
+            $stmtUser = $this->database->connect()->prepare('
+                DELETE FROM "User" WHERE UserID = :userID
+            ');
+
+            $stmtUser->bindParam(':userID', $userID, PDO::PARAM_INT);
+            $stmtUser->execute();
+
+            $stmtUserData = $this->database->connect()->prepare('
+                DELETE FROM UserData WHERE UserID = :userID
+            ');
+
+            $stmtUserData->bindParam(':userID', $userID, PDO::PARAM_INT);
+            $stmtUserData->execute();
+
+            $this->database->connect()->commit();
+        } catch (PDOException $e) {
+            $this->database->connect()->rollBack();
+            die("Error deleting user: " . $e->getMessage());
+        }
+    }
 }

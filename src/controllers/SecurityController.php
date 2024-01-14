@@ -23,14 +23,7 @@ class SecurityController extends AppController {
 
         $userDataRepository = new UserDataRepository();
         $userData = $userDataRepository->getUserData($user->getUserID());
-
-        $_SESSION["UserID"] = $user->getUserID();
-        $_SESSION["Email"] = $user->getEmail();
-        $_SESSION["Password"] = $user->getPassword();
-        $_SESSION["IsAdmin"] = $user->getIsAdmin();
-
-        setcookie("id", $user->getUserId(), time() + 3600, "/");
-
+        
         if($userData) {
             $_SESSION["UserId"] = $userData->getUserID();
             $_SESSION["Name"] = $userData->getName();
@@ -38,6 +31,14 @@ class SecurityController extends AppController {
             $_SESSION["Telephone"] = $userData->getTelephone();
             $_SESSION["StudentCardID"] = $userData->getStudentCardID();
         }
+        
+        $_SESSION["UserID"] = $user->getUserID();
+        $_SESSION["Email"] = $user->getEmail();
+        $_SESSION["Password"] = $user->getPassword();
+        $_SESSION["IsAdmin"] = $user->getIsAdmin();
+
+        setcookie("id", $user->getUserId(), time() + 3600, "/");
+
         
         if($user->getIsAdmin()) {
             $url = "http://$_SERVER[HTTP_HOST]";
