@@ -9,8 +9,8 @@ require_once __DIR__.'/../repositories/UserDataRepository.php';
 class SecurityController extends AppController {
     public function login() {
         $userRepository = new UserRepository();
-        $email = $_POST["email"];
-        $password = $_POST["password"];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
         $user = $userRepository->getUser($email);
 
         if(!$user) {
@@ -25,17 +25,17 @@ class SecurityController extends AppController {
         $userData = $userDataRepository->getUserData($user->getUserID());
         
         if($userData) {
-            $_SESSION["UserId"] = $userData->getUserID();
-            $_SESSION["Name"] = $userData->getName();
-            $_SESSION["Surname"] = $userData->getSurname();
-            $_SESSION["Telephone"] = $userData->getTelephone();
-            $_SESSION["StudentCardID"] = $userData->getStudentCardID();
+            $_SESSION['UserId'] = $userData->getUserID();
+            $_SESSION['Name'] = $userData->getName();
+            $_SESSION['Surname'] = $userData->getSurname();
+            $_SESSION['Telephone'] = $userData->getTelephone();
+            $_SESSION['StudentCardID'] = $userData->getStudentCardID();
         }
         
-        $_SESSION["UserID"] = $user->getUserID();
-        $_SESSION["Email"] = $user->getEmail();
-        $_SESSION["Password"] = $user->getPassword();
-        $_SESSION["IsAdmin"] = $user->getIsAdmin();
+        $_SESSION['UserID'] = $user->getUserID();
+        $_SESSION['Email'] = $user->getEmail();
+        $_SESSION['Password'] = $user->getPassword();
+        $_SESSION['IsAdmin'] = $user->getIsAdmin();
 
         setcookie("id", $user->getUserId(), time() + 3600, "/");
 
