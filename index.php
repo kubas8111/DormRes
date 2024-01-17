@@ -16,7 +16,11 @@ Router::get('main', 'DefaultController');
 Router::post('login', 'SecurityController');
 Router::post('register', 'SecurityController');
 
+Router::post('addReservation', 'ReservationController');
+Router::post('cancelReservation', 'ReservationController');
 
+Router::post('addUser', 'UserController');
+Router::post('deleteUser', 'UserController');
 
 
 Router::run($path);
