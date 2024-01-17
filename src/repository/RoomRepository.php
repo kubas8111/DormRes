@@ -78,7 +78,7 @@ class RoomRepository extends Repository {
         return $result;
     }
 
-    public function getAvailableRooms(): array {
+    public function getAvailableRooms(int $dormitoryID): array {
         $stmt = $this->database->connect()->prepare('
             SELECT R.*
             FROM Room R
@@ -87,8 +87,11 @@ class RoomRepository extends Repository {
                 FROM Reservation
                 GROUP BY RoomID
             ) Res ON R.RoomID = Res.RoomID
-            WHERE Res.reservations_count IS NULL OR Res.reservations_count < R.Type
+            WHERE R.DormitoryID = :dormitoryID
+            AND (Res.reservations_count IS NULL OR Res.reservations_count < R.Type)
         ');
+
+        $stmt->bindParam(':dormitoryID', $dormitoryID, PDO::PARAM_INT);
         $stmt->execute();
 
         $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);

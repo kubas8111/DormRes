@@ -3,7 +3,7 @@
 require_once 'AppController.php';
 require_once __DIR__.'/../models/User.php';
 require_once __DIR__.'/../repositories/UserRepository.php';
-
+require_once __DIR__.'/../models/UserData.php';
 require_once __DIR__.'/../repositories/UserDataRepository.php';
 
 class SecurityController extends AppController {
@@ -50,27 +50,34 @@ class SecurityController extends AppController {
     }
 
     public function register() {
-        $userRepository = new UserRepository();
+        $email = $_POST['email'] ?? '';
+        $password = $_POST['password'] ?? '';
+        $name = $_POST['name'] ?? '';
+        $surname = $_POST['surname'] ?? '';
+        $telephone = $_POST['telephone'] ?? '';
+        $studentCardID = $_POST['studentCardID'] ?? '';
 
-        if($userRepository->getUser($_POST['email']) != null) {
+        $userRepository = new UserRepository();
+        if ($userRepository->getUser($email)) {
             return $this->render("register", ['messages' => ['User with this email already exists!']]);
         }
 
-        $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $userRepository->database->beginTransaction();
 
-        if($userRepository->addUserWithData(
-                                            $_POST['email'],
-                                            $hashedPassword,
-                                            false,
-                                            $_POST['name'],
-                                            $_POST['surname'],
-                                            $_POST['telephone'],
-                                            $_POST['studentCardID']
-        )) {
-            $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/login");
-        } else {
-            return $this->render("register", ['messages' => ['Something went wrong!']]);
+        try {
+            $userRepository->addUser($email, password_hash($password, PASSWORD_DEFAULT), false);
+            $userID = $userRepository->getLastInsertId();
+
+            $userDataRepository = new UserDataRepository();
+            $userDataRepository->addUserData($userID, $name, $surname, $telephone, $studentCardID);
+
+            $userRepository->database->commitTransaction();
+        } catch (PDOException $e) {
+            $userRepository->database->rollbackTransaction();
+            die("Error registering user: " . $e->getMessage());
         }
+
+        $url = "http://$_SERVER[HTTP_HOST]";
+        header("Location: {$url}/login");
     }
 }

@@ -4,20 +4,31 @@ require_once 'Repository.php';
 require_once __DIR__.'/../models/Reservation.php';
 
 class ReservationRepository extends Repository {
-    public function addReservation(int $userID, int $roomID, string $time): void {
+    public function addReservation(int $userID, int $roomID): void {
         try {
             $stmt = $this->database->connect()->prepare('
-                INSERT INTO Reservation (UserID, RoomID, Time)
-                VALUES (:userID, :roomID, :time)
+            INSERT INTO Reservation (UserID, RoomID)
+            VALUES (:userID, :roomID)
             ');
-
+            
             $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
             $stmt->bindParam(':roomID', $roomID, PDO::PARAM_INT);
-            $stmt->bindParam(':time', $time, PDO::PARAM_STR);
-
+            
             $stmt->execute();
         } catch (PDOException $e) {
             die("Error adding reservation: " . $e->getMessage());
+        }
+    }
+    
+    public function deleteReservation(int $userID): void {
+        try {
+            $stmt = $this->database->connect()->prepare('
+                DELETE FROM Reservation WHERE UserID = :userID
+            ');
+            $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            die("Error deleting reservation: " . $e->getMessage());
         }
     }
 
@@ -78,17 +89,5 @@ class ReservationRepository extends Repository {
         }
 
         return $details;
-    }
-
-    public function deleteReservation(int $userID): void {
-        try {
-            $stmt = $this->database->connect()->prepare('
-                DELETE FROM Reservation WHERE UserID = :userID
-            ');
-            $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
-            $stmt->execute();
-        } catch (PDOException $e) {
-            die("Error deleting reservation: " . $e->getMessage());
-        }
     }
 }
