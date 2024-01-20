@@ -6,8 +6,9 @@ require_once __DIR__.'/../models/UserData.php';
 class UserDataRepository extends Repository {
     public function addUserData(int $userID, string $name, string $surname, string $telephone, string $studentCardID): void {
         try {
-            $stmt = $this->database->connect()->prepare('
-                INSERT INTO UserData (UserID, Name, Surname, Telephone, StudentCardID)
+            $connection = $this->database->connect();
+            $stmt = $connection->prepare('
+                INSERT INTO "UserData" ("UserID", "Name", "Surname", "Telephone", "StudentCardID")
                 VALUES (:userID, :name, :surname, :telephone, :studentCardID)
             ');
 
@@ -25,8 +26,9 @@ class UserDataRepository extends Repository {
 
     public function deleteUserData(int $userID): void {
         try {
-            $stmt = $this->database->connect()->prepare('
-                DELETE FROM UserData WHERE UserID = :userID
+            $connection = $this->database->connect();
+            $stmt = $connection->prepare('
+                DELETE FROM "UserData" WHERE "UserID" = :userID
             ');
 
             $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
@@ -37,8 +39,9 @@ class UserDataRepository extends Repository {
     }
     
     public function getUserData(int $userID): ?UserData {
-        $stmt = $this->database->connect()->prepare('
-            SELECT * FROM UserData WHERE UserID = :userID
+        $connection = $this->database->connect();
+        $stmt = $connection->prepare('
+            SELECT * FROM "UserData" WHERE "UserID" = :userID
         ');
         $stmt->bindParam(':userID', $userID, PDO::PARAM_STR);
         $stmt->execute();
@@ -58,8 +61,9 @@ class UserDataRepository extends Repository {
 
     public function getUserDataFromView(int $userID): ?array {
         try {
-            $stmt = $this->database->connect()->prepare('
-                SELECT * FROM UserDetailsView WHERE UserID = :userID
+            $connection = $this->database->connect();
+            $stmt = $connection->prepare('
+                SELECT * FROM "UserDetailsView" WHERE "UserID" = :userID
             ');
             $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
             $stmt->execute();

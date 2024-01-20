@@ -6,8 +6,9 @@ require_once __DIR__.'/../models/Reservation.php';
 class ReservationRepository extends Repository {
     public function addReservation(int $userID, int $roomID): void {
         try {
-            $stmt = $this->database->connect()->prepare('
-            INSERT INTO Reservation (UserID, RoomID)
+            $connection = $this->database->connect();
+            $stmt = $connection->prepare('
+            INSERT INTO "Reservation" ("UserID", "RoomID")
             VALUES (:userID, :roomID)
             ');
             
@@ -22,8 +23,9 @@ class ReservationRepository extends Repository {
     
     public function deleteReservation(int $userID): void {
         try {
-            $stmt = $this->database->connect()->prepare('
-                DELETE FROM Reservation WHERE UserID = :userID
+            $connection = $this->database->connect();
+            $stmt = $connection->prepare('
+                DELETE FROM "Reservation" WHERE "UserID" = :userID
             ');
             $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
             $stmt->execute();
@@ -33,8 +35,9 @@ class ReservationRepository extends Repository {
     }
 
     public function getReservation(int $reservationID): ?Reservation {
-        $stmt = $this->database->connect()->prepare('
-            SELECT * FROM Reservation WHERE ReservationID = :reservationID
+        $connection = $this->database->connect();
+        $stmt = $connection->prepare('
+            SELECT * FROM "Reservation" WHERE "ReservationID" = :reservationID
         ');
         $stmt->bindParam(':reservationID', $reservationID, PDO::PARAM_STR);
         $stmt->execute();
@@ -52,8 +55,9 @@ class ReservationRepository extends Repository {
     }
 
     public function getReservationByUserID(int $userID): ?Reservation {
-        $stmt = $this->database->connect()->prepare('
-            SELECT * FROM Reservation WHERE UserID = :userID
+        $connection = $this->database->connect();
+        $stmt = $connection->prepare('
+            SELECT * FROM "Reservation" WHERE "UserID" = :userID
         ');
         $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
         $stmt->execute();
@@ -72,12 +76,13 @@ class ReservationRepository extends Repository {
     }
 
     public function getReservationDetailsByUserID(int $userID): ?array {
-        $stmt = $this->database->connect()->prepare('
-            SELECT R.Time, Ro.RoomCode, D.Name as DormitoryName
-            FROM Reservation R
-            JOIN Room Ro ON R.RoomID = Ro.RoomID
-            JOIN Dormitory D ON Ro.DormitoryID = D.DormitoryID
-            WHERE R.UserID = :userID
+        $connection = $this->database->connect();
+        $stmt = $connection->prepare('
+            SELECT R."Time", Ro."RoomCode", D."Name" as DormitoryName
+            FROM "Reservation" R
+            JOIN "Room" Ro ON R."RoomID" = Ro."RoomID"
+            JOIN "Dormitory" D ON Ro."DormitoryID" = D."DormitoryID"
+            WHERE R."UserID" = :userID
             LIMIT 1
         ');
         $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);

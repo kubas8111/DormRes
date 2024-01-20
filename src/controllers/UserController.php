@@ -11,27 +11,19 @@ require_once __DIR__.'/../repositories/UserDataRepository.php';
 class UserController extends AppController {
     public function addUser() {
         try {
-            $email = $_POST['email'] ?? '';
-            $password = $_POST['password'] ?? '';
-            $name = $_POST['name'] ?? '';
-            $surname = $_POST['surname'] ?? '';
-            $telephone = $_POST['telephone'] ?? '';
-            $studentCardID = $_POST['studentCardID'] ?? '';
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $name = $_POST['name'];
+            $surname = $_POST['surname'];
+            $telephone = $_POST['telephone'];
+            $studentCardID = $_POST['studentCardID'];
     
             $userRepository = new UserRepository();
             $userDataRepository = new UserDataRepository();
     
-            $userRepository->database->beginTransaction();
-    
-            $userRepository->addUser($email, $password);
-    
-            $userID = $userRepository->getLastInsertId();
-    
+            $userID = $userRepository->addUser($email, $password);
             $userDataRepository->addUserData($userID, $name, $surname, $telephone, $studentCardID);
-    
-            $userRepository->database->commitTransaction();
         } catch (PDOException $e) {
-            $userRepository->database->rollbackTransaction();
             die("Error adding user with data: " . $e->getMessage());
         }
     }

@@ -61,21 +61,22 @@ class DefaultController extends AppController {
         $userDataRepository = new UserDataRepository();
         $reservationRepository = new ReservationRepository();
 
-        // $dormitoryRepository->addDormitory('dupadupadupa geng', 'karkuw', 'eeedzwig', '+48 111 111 111');
+        // $last = $dormitoryRepository->addDormitory('dupadupadupa geng', 'karkuw', 'eeedzwig', '+48 111 111 111');
         // $roomRepository->addRoom("DUPA", 7, 2, 3);
         // $roomRepository->addRoom("DUPA1", 7, 1, 3);
         // $roomRepository->addRoom("DUPA2", 7, 1, 3);
         // $roomRepository->addRoom("DUPA3", 7, 2, 3);
         // $roomRepository->deleteRoom(341);
-        $dormitoryRepository->deleteDormitory(8);
-        // $last = $dormitoryRepository->getLastInsertID();
+        $dormitoryRepository->deleteDormitory(10);
+        $dormitoryRepository->deleteDormitory(11);
+        // $last = $dormitoryRepository->getDormitory(11);
         session_start();
         
         $rooms = $dormitoryRepository->getDormitories();
         
         $_SESSION['code'] = $rooms;
-        $_SESSION['id'] = $last;
-
+        // $_SESSION['id'] = $last;
+        
         $this->render('dupa');
     }
 }

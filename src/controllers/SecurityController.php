@@ -50,31 +50,21 @@ class SecurityController extends AppController {
     }
 
     public function register() {
-        $email = $_POST['email'] ?? '';
-        $password = $_POST['password'] ?? '';
-        $name = $_POST['name'] ?? '';
-        $surname = $_POST['surname'] ?? '';
-        $telephone = $_POST['telephone'] ?? '';
-        $studentCardID = $_POST['studentCardID'] ?? '';
-
-        $userRepository = new UserRepository();
-        if ($userRepository->getUser($email)) {
-            return $this->render("register", ['messages' => ['User with this email already exists!']]);
-        }
-
-        $userRepository->database->beginTransaction();
-
         try {
-            $userRepository->addUser($email, password_hash($password, PASSWORD_DEFAULT), false);
-            $userID = $userRepository->getLastInsertId();
-
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $name = $_POST['name'];
+            $surname = $_POST['surname'];
+            $telephone = $_POST['telephone'];
+            $studentCardID = $_POST['studentCardID'];
+    
+            $userRepository = new UserRepository();
             $userDataRepository = new UserDataRepository();
+    
+            $userID = $userRepository->addUser($email, password_hash($password, PASSWORD_DEFAULT));
             $userDataRepository->addUserData($userID, $name, $surname, $telephone, $studentCardID);
-
-            $userRepository->database->commitTransaction();
         } catch (PDOException $e) {
-            $userRepository->database->rollbackTransaction();
-            die("Error registering user: " . $e->getMessage());
+            die("Error adding user with data: " . $e->getMessage());
         }
 
         $url = "http://$_SERVER[HTTP_HOST]";

@@ -12,11 +12,12 @@ class DormitoryRepository extends Repository {
     public function __construct() {
         parent::__construct();
         $this->roomRepository = new RoomRepository();
-        $this->connection = $this->database->connect();
     }
-    public function addDormitory(string $address, string $city, string $postcode, string $telephone): void {
+
+    public function addDormitory(string $address, string $city, string $postcode, string $telephone): int {
         try {
-            $stmt = $this->connection->prepare('
+            $connection = $this->database->connect();
+            $stmt = $connection->prepare('
                 INSERT INTO "Dormitory" ("Address", "City", "Postcode", "Telephone")
                 VALUES (:address, :city, :postcode, :telephone)
             ');
@@ -27,6 +28,7 @@ class DormitoryRepository extends Repository {
             $stmt->bindParam(':telephone', $telephone, PDO::PARAM_STR);
 
             $stmt->execute();
+            return (int) $connection->lastInsertId();
         } catch (PDOException $e) {
             die("Error adding dormitory: " . $e->getMessage());
         }
@@ -34,10 +36,11 @@ class DormitoryRepository extends Repository {
 
     public function deleteDormitory(int $dormitoryID): void {
         try {
-            $this->$connection->beginTransaction();
-    
+            $connection = $this->database->connect();
+            $connection->beginTransaction();
+            
             $stmtCheckRooms = $connection->prepare('
-                SELECT "RoomID" FROM "Room" WHERE "DormitoryID" = :dormitoryID
+            SELECT "RoomID" FROM "Room" WHERE "DormitoryID" = :dormitoryID
             ');
     
             $stmtCheckRooms->bindParam(':dormitoryID', $dormitoryID, PDO::PARAM_INT);
@@ -54,16 +57,17 @@ class DormitoryRepository extends Repository {
             $stmtDormitory->bindParam(':dormitoryID', $dormitoryID, PDO::PARAM_INT);
             $stmtDormitory->execute();
     
-            $this->$connection->commit();
+            $connection->commit();
         } catch (PDOException $e) {
-            $this->$connection->rollBack();
+            $connection->rollBack();
             die("Error deleting dormitory: " . $e->getMessage());
         }
     }
     
 
     public function getDormitory(int $dormitoryID): ?Dormitory {
-        $stmt = $this->connection->prepare('
+        $connection = $this->database->connect();
+        $stmt = $connection->prepare('
             SELECT * FROM "Dormitory" WHERE "DormitoryID" = :dormitoryID
         ');
         $stmt->bindParam(':dormitoryID', $dormitoryID, PDO::PARAM_STR);
@@ -83,7 +87,8 @@ class DormitoryRepository extends Repository {
     }
 
     public function getDormitories(): array {
-        $stmt = $this->connection->prepare('
+        $connection = $this->database->connect();
+        $stmt = $connection->prepare('
             SELECT * FROM "Dormitory"
         ');
         $stmt->execute();
@@ -102,9 +107,5 @@ class DormitoryRepository extends Repository {
         }
 
         return $result;
-    }
-
-    public function getLastInsertId(): int {
-        return (int) $this->connection->lastInsertId();
     }
 }
