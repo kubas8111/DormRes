@@ -7,15 +7,17 @@ require_once __DIR__.'/RoomRepository.php';
 
 class DormitoryRepository extends Repository {
     private $roomRepository;
+    private $connection;
 
     public function __construct() {
         parent::__construct();
         $this->roomRepository = new RoomRepository();
+        $this->connection = $this->database->connect();
     }
     public function addDormitory(string $address, string $city, string $postcode, string $telephone): void {
         try {
-            $stmt = $this->database->connect()->prepare('
-                INSERT INTO Dormitory (Address, City, Postcode, Telephone)
+            $stmt = $this->connection->prepare('
+                INSERT INTO "Dormitory" ("Address", "City", "Postcode", "Telephone")
                 VALUES (:address, :city, :postcode, :telephone)
             ');
 
@@ -32,36 +34,37 @@ class DormitoryRepository extends Repository {
 
     public function deleteDormitory(int $dormitoryID): void {
         try {
-            $this->database->connect()->beginTransaction();
-
-            $stmtCheckRooms = $this->database->connect()->prepare('
-                SELECT RoomID FROM Room WHERE DormitoryID = :dormitoryID
+            $this->$connection->beginTransaction();
+    
+            $stmtCheckRooms = $connection->prepare('
+                SELECT "RoomID" FROM "Room" WHERE "DormitoryID" = :dormitoryID
             ');
-
+    
             $stmtCheckRooms->bindParam(':dormitoryID', $dormitoryID, PDO::PARAM_INT);
             $stmtCheckRooms->execute();
-
+    
             while ($room = $stmtCheckRooms->fetch(PDO::FETCH_ASSOC)) {
                 $this->roomRepository->deleteRoom($room['RoomID']);
             }
-
-            $stmtDormitory = $this->database->connect()->prepare('
-                DELETE FROM Dormitory WHERE DormitoryID = :dormitoryID
+    
+            $stmtDormitory = $connection->prepare('
+                DELETE FROM "Dormitory" WHERE "DormitoryID" = :dormitoryID
             ');
-
+    
             $stmtDormitory->bindParam(':dormitoryID', $dormitoryID, PDO::PARAM_INT);
             $stmtDormitory->execute();
-
-            $this->database->connect()->commit();
+    
+            $this->$connection->commit();
         } catch (PDOException $e) {
-            $this->database->connect()->rollBack();
+            $this->$connection->rollBack();
             die("Error deleting dormitory: " . $e->getMessage());
         }
     }
+    
 
     public function getDormitory(int $dormitoryID): ?Dormitory {
-        $stmt = $this->database->connect()->prepare('
-            SELECT * FROM "Dormitory" WHERE DormitoryID = :dormitoryID
+        $stmt = $this->connection->prepare('
+            SELECT * FROM "Dormitory" WHERE "DormitoryID" = :dormitoryID
         ');
         $stmt->bindParam(':dormitoryID', $dormitoryID, PDO::PARAM_STR);
         $stmt->execute();
@@ -80,8 +83,8 @@ class DormitoryRepository extends Repository {
     }
 
     public function getDormitories(): array {
-        $stmt = $this->database->connect()->prepare('
-            SELECT * FROM Dormitory
+        $stmt = $this->connection->prepare('
+            SELECT * FROM "Dormitory"
         ');
         $stmt->execute();
 
@@ -99,5 +102,9 @@ class DormitoryRepository extends Repository {
         }
 
         return $result;
+    }
+
+    public function getLastInsertId(): int {
+        return (int) $this->connection->lastInsertId();
     }
 }

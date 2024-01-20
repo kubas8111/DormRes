@@ -1,6 +1,10 @@
 <?php
 
 require_once 'AppController.php';
+require_once __DIR__.'/../models/Reservation.php';
+require_once __DIR__.'/../repositories/ReservationRepository.php';
+require_once __DIR__.'/../models/Room.php';
+require_once __DIR__.'/../repositories/RoomRepository.php';
 
 class ReservationController extends AppController {
     public function addReservation() {
@@ -47,4 +51,18 @@ class ReservationController extends AppController {
             die("Error: " . $e->getMessage());
         }
     }
+
+    public function fetchAvailableRooms() {
+        $dormitoryID = $_GET['dormitoryID'];
+    
+        $roomRepository = new RoomRepository();
+        $availableRooms = $roomRepository->getAvailableRooms($dormitoryID);
+    
+        $options = '';
+        foreach ($availableRooms as $room) {
+          $options .= '<option value="' . $room->getRoomID() . '">' . $room->getRoomCode() . '</option>';
+        }
+    
+        echo $options;
+      }
 }

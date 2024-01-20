@@ -22,5 +22,7 @@ Router::post('cancelReservation', 'ReservationController');
 Router::post('addUser', 'UserController');
 Router::post('deleteUser', 'UserController');
 
+Router::post('test', 'DefaultController');
+
 
 Router::run($path);

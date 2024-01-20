@@ -7,7 +7,7 @@ class RoomRepository extends Repository {
     public function addRoom(string $roomCode, int $dormitoryID, int $type, int $floor): void {
         try {
             $stmt = $this->database->connect()->prepare('
-                INSERT INTO Room (RoomCode, DormitoryID, Type, Floor)
+                INSERT INTO "Room" ("Roomcode", "DormitoryID", "Type", "Floor")
                 VALUES (:roomCode, :dormitoryID, :type, :floor)
             ');
 
@@ -25,7 +25,7 @@ class RoomRepository extends Repository {
     public function deleteRoom(int $roomID): void {
         try {
             $stmt = $this->database->connect()->prepare('
-                DELETE FROM Room WHERE RoomID = :roomID
+                DELETE FROM "Room" WHERE "RoomID" = :roomID
             ');
 
             $stmt->bindParam(':roomID', $roomID, PDO::PARAM_INT);
@@ -37,7 +37,7 @@ class RoomRepository extends Repository {
 
     public function getRoom(int $roomID): ?Room {
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM Room WHERE RoomID = :roomID
+            SELECT * FROM "Room" WHERE "RoomID" = :roomID
         ');
         $stmt->bindParam(':roomID', $roomID, PDO::PARAM_STR);
         $stmt->execute();
@@ -48,7 +48,7 @@ class RoomRepository extends Repository {
         }
         return new Room(
             $room['RoomID'],
-            $room['RoomCode'],
+            $room['Roomcode'],
             $room['DormitoryID'],
             $room['Type'],
             $room['Floor']
@@ -57,7 +57,7 @@ class RoomRepository extends Repository {
 
     public function getRoomsByDormitoryID(int $dormitoryID): array {
         $stmt = $this->database->connect()->prepare('
-            SELECT * FROM Room WHERE DormitoryID = :dormitoryID
+            SELECT * FROM "Room" WHERE "DormitoryID" = :dormitoryID
         ');
         $stmt->bindParam(':dormitoryID', $dormitoryID, PDO::PARAM_INT);
         $stmt->execute();
@@ -68,7 +68,7 @@ class RoomRepository extends Repository {
         foreach ($rooms as $room) {
             $result[] = new Room(
                 $room['RoomID'],
-                $room['RoomCode'],
+                $room['Roomcode'],
                 $room['DormitoryID'],
                 $room['Type'],
                 $room['Floor']
@@ -81,14 +81,14 @@ class RoomRepository extends Repository {
     public function getAvailableRooms(int $dormitoryID): array {
         $stmt = $this->database->connect()->prepare('
             SELECT R.*
-            FROM Room R
+            FROM "Room" R
             LEFT JOIN (
-                SELECT RoomID, COUNT(*) as reservations_count
-                FROM Reservation
-                GROUP BY RoomID
-            ) Res ON R.RoomID = Res.RoomID
-            WHERE R.DormitoryID = :dormitoryID
-            AND (Res.reservations_count IS NULL OR Res.reservations_count < R.Type)
+                SELECT "RoomID", COUNT(*) as reservations_count
+                FROM "Reservation"
+                GROUP BY "RoomID"
+            ) Res ON R."RoomID" = Res."RoomID"
+            WHERE R."DormitoryID" = :dormitoryID
+            AND (Res.reservations_count IS NULL OR Res.reservations_count < R."Type")
         ');
 
         $stmt->bindParam(':dormitoryID', $dormitoryID, PDO::PARAM_INT);
@@ -100,7 +100,7 @@ class RoomRepository extends Repository {
         foreach ($rooms as $room) {
             $result[] = new Room(
                 $room['RoomID'],
-                $room['RoomCode'],
+                $room['Roomcode'],
                 $room['DormitoryID'],
                 $room['Type'],
                 $room['Floor']

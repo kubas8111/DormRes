@@ -7,7 +7,7 @@ class UserRepository extends Repository {
     public function addUser(string $email, string $password, bool $isAdmin = false): void {
         try {
             $stmt = $this->database->connect()->prepare('
-                INSERT INTO "User" (Email, Password, IsAdmin)
+                INSERT INTO "User" ("Email", "Password", "IsAdmin")
                 VALUES (:email, :password, :isAdmin)
             ');
 
