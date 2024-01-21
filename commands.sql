@@ -309,6 +309,55 @@ VALUES
   ('705', 5, 1, 7), ('706', 5, 1, 7), ('707', 5, 2, 7), ('708', 5, 2, 7),
   ('709', 5, 2, 7), ('710', 5, 2, 7), ('711', 5, 3, 7), ('712', 5, 3, 7);
 
+-- Tworzenie użytkowników
+
+-- Dodanie 25 użytkowników do tabeli User
+INSERT INTO "User" ("Email", "Password", "IsAdmin") VALUES
+('adam.kowalski@example.com', '$2y$10$8HJBzTelRHcRAkXvnl1O.OTCAKl/BoPJG0Xu/2fJjg4G24eLHOuBK', false),
+('ewa.nowak@example.com', '$2y$10$5xpohs2X5AGjY2XUJxR8l.m9ORRYnj2YfiaRbbvVhfLZQ4a4hr04a', false),
+('jan.majewski@example.com', '$2y$10$40Qx4XJ896HJvkpBjGiEFeF15UjxPJg3RWHEJAVVWgP2ABlsz9yJO', false),
+('katarzyna.wisniewska@example.com', '$2y$10$uYU3vK6g6pMZP8GEEEHFAe3ILhqZ0Hf1D9oG.14q7ULWG1WSnHI3a', false),
+('andrzej.kaczmarek@example.com', '$2y$10$Ohi62IeE.6uChnlwKupKVO9By3RBBGe5CliLEApXvlP8wXD7JS2hC', false),
+('maria.krawczyk@example.com', '$2y$10$wij9ziazD4faO1pOUDCIAuU1R8dLgM45k7d341hgeWO8f3.a5S7EG', false),
+('pawel.wozniak@example.com', '$2y$10$sV/.bEeI5VvHKRcZeSk3tulW5DfVtEhkYI5ABE5kDtFuB8M.//5n6', false),
+('anna.lewandowska@example.com', '$2y$10$YCjh4B.2GH.xwO51FmP5Fug/M8psO7dzKBfI5Kf1vkhUWudfHUauS', false),
+('tomasz.dabrowski@example.com', '$2y$10$eaWVdcnxPCLonTkO1tO8wuTtx0oMlJpcT/5PFfgaYWQvDRV/lefaG', false),
+('malgorzata.szymanska@example.com', '$2y$10$aZc1uqjGYqE6hZCUSU0Xu.SkbXtWNI4q9w0N6IkKvJm0VlozZV1gC', false),
+('krzysztof.jaworski@example.com', '$2y$10$P4.IQpdmGPF0oaUrruCVvOcKWWehCE7YjXcMBrHLlZNW.UAkc8crK', false),
+('magdalena.wieczorek@example.com', '$2y$10$w.EGf35fYYjXFuKUOfUfHOFRuGt/NTkWP1Ek3PBri9sD1JZd9wbNi', false),
+('rafal.jakubowski@example.com', '$2y$10$nbeL8spjXkUvFEgMPOCqTugRF7iAQV3yTylvLcyIwLTVltLzuLE3i', false),
+('monika.zajac@example.com', '$2y$10$zzZ51aE2/FxQKq7u4xGOXefQ2UhHr3W01oTSY0S9eZ7dXv8zPob2C', false),
+('grzegorz.krol@example.com', '$2y$10$8nwz0nGWraxGp5BBtrBy9uz845dLaMBBy0q0N.N0eZKHCWzgTCfm2', false),
+('ewelina.piotrowska@example.com', '$2y$10$1hwm5DPH6HOB5iCrY.SrZuQIVnebYLifs6mYDrCXzWZiZ7q/ObZEi', false),
+('jacek.nowakowski@example.com', '$2y$10$bVUFUXaEJC1QTPZSfIIFLeGB658JdDsVXS5orZd4C60t6GZcG9vva', false),
+('natalia.mazur@example.com', '$2y$10$cQLM6fdWI7b3PlWoIALrgePZQFdRpgJngsNsGCovTAp2pNxotvXlO', false),
+('patryk.kwiatkowski@example.com', '$2y$10$zVu.oAEfg.ipv6zI/Iqele.39fcAbFXacTWcsPsemUdMoxGgOlTFC', false),
+('kamila.kubiak@example.com', '$2y$10$IBCXQJe9gHn9DjbMDJbl0u/PWQLjLvsShBWatWSNstl7S2obSzVxC', false)
+
+INSERT INTO "UserData" ("UserID", "Name", "Surname", "Telephone", "StudentCardID") VALUES
+(10, 'John', 'Doe', '+48 123 456 789', 'ABC123456'),
+(11, 'Jane', 'Smith', '+48 987 654 321', 'DEF789012'),
+(12, 'Michael', 'Johnson', '+48 555 123 789', 'GHI345678'),
+(13, 'Emily', 'Brown', '+48 111 222 333', 'JKL901234'),
+(14, 'Daniel', 'Wilson', '+48 999 888 777', 'MNO567890'),
+(15, 'Olivia', 'Taylor', '+48 333 444 555', 'PQR123456'),
+(16, 'Matthew', 'Anderson', '+48 666 777 888', 'STU789012'),
+(17, 'Sophia', 'Thomas', '+48 111 222 333', 'VWX345678'),
+(18, 'Aiden', 'Hill', '+48 444 555 666', 'YZA901234'),
+(19, 'Grace', 'Baker', '+48 777 888 999', 'BCD567890'),
+(20, 'Ethan', 'Miller', '+48 222 333 444', 'EFG123456'),
+(21, 'Emma', 'Davis', '+48 555 666 777', 'HIJ789012'),
+(22, 'Noah', 'Garcia', '+48 999 888 777', 'KLM345678'),
+(23, 'Isabella', 'Martinez', '+48 333 444 555', 'NOP901234'),
+(24, 'Liam', 'Lopez', '+48 666 777 888', 'QRS567890'),
+(25, 'Mia', 'Harris', '+48 111 222 333', 'TUV123456'),
+(26, 'Lucas', 'Clark', '+48 444 555 666', 'WXY789012'),
+(27, 'Ava', 'Allen', '+48 777 888 999', 'ZAB345678'),
+(28, 'Logan', 'Wright', '+48 222 333 444', 'CDE123456'),
+(29, 'Ella', 'Adams', '+48 555 666 777', 'FGH789012');
+
+INSERT INTO "Reservation" ("UserID", "RoomID")
+SELECT generate_series(10, 29) AS "UserID", generate_series(4, 23) AS "RoomID";
 
 -- Tworzenie funkcji
 CREATE OR REPLACE FUNCTION set_reservation_time()
@@ -324,6 +373,8 @@ CREATE TRIGGER set_reservation_time_trigger
 BEFORE INSERT ON "Reservation"
 FOR EACH ROW
 EXECUTE FUNCTION set_reservation_time();
+
+-- Tworzenie widoków
 
 CREATE VIEW "UserDetails" AS
 SELECT
