@@ -310,3 +310,17 @@ VALUES
   ('709', 5, 2, 7), ('710', 5, 2, 7), ('711', 5, 3, 7), ('712', 5, 3, 7);
 
 
+-- Tworzenie funkcji
+CREATE OR REPLACE FUNCTION set_reservation_time()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW."Time" := NOW();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Tworzenie wyzwalacza
+CREATE TRIGGER set_reservation_time_trigger
+BEFORE INSERT ON "Reservation"
+FOR EACH ROW
+EXECUTE FUNCTION set_reservation_time();
