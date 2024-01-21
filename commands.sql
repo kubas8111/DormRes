@@ -120,7 +120,7 @@ SELECT
     UD.StudentCardID
 FROM "User" U
 JOIN UserData UD ON U.UserID = UD.UserID
-WHERE U.IsAdmin = false;
+WHERE U.isAdmin = false;
 
 -- DODAWANIE AKADEMIKOW
 
@@ -308,3 +308,5 @@ VALUES
   ('701', 5, 1, 7), ('702', 5, 1, 7), ('703', 5, 1, 7), ('704', 5, 1, 7),
   ('705', 5, 1, 7), ('706', 5, 1, 7), ('707', 5, 2, 7), ('708', 5, 2, 7),
   ('709', 5, 2, 7), ('710', 5, 2, 7), ('711', 5, 3, 7), ('712', 5, 3, 7);
+
+

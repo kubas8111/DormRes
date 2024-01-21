@@ -33,7 +33,9 @@
             <div class="account">
                 <div class="user">
                     <img src="public/img/user.png">
-                    <p>Witaj [name]</p>
+                    <?php
+                        echo '<p>Witaj '.$_SESSION['Name'].'</p>';
+                    ?>
                 </div>
                 <div class="logout">
                     <button>Wyloguj</button>

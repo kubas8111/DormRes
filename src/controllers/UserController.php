@@ -31,20 +31,17 @@ class UserController extends AppController {
     public function deleteUser() {
         try {
             session_start();
-            $userID = $_SESSION['userID'] ?? 0;
+            $userID = $_SESSION['userID'];
     
+            // $userID = 4;
+
             $userRepository = new UserRepository();
             $userDataRepository = new UserDataRepository();
-    
-            $userRepository->database->beginTransaction();
     
             $userDataRepository->deleteUserData($userID);
     
             $userRepository->deleteUser($userID);
-    
-            $userRepository->database->commitTransaction();
         } catch (PDOException $e) {
-            $userRepository->database->rollbackTransaction();
             die("Error deleting user: " . $e->getMessage());
         }
     }

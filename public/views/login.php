@@ -15,7 +15,7 @@
             <img src="public/img/logo.svg">
         </div>
         <div class="login-container">
-            <form action="login" method="post">
+            <form action="login" method="POST">
                 <h2>LOGOWANIE</h2>
                 <div class="message">
                     <?php if(isset($message)) {
@@ -23,7 +23,7 @@
                     }
                     ?>
                 </div>
-                <input name="login" type="text" placeholder="login">
+                <input name="email" type="text" placeholder="email">
                 <input name="password" type="password" placeholder="password">
                 <button>LOGIN</button>
             </form>

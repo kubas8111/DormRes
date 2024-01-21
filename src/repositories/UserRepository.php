@@ -8,7 +8,7 @@ class UserRepository extends Repository {
         try {
             $connection = $this->database->connect();
             $stmt = $connection->prepare('
-                INSERT INTO "User" ("Email", "Password", "IsAdmin")
+                INSERT INTO "User" ("Email", "Password", "isAdmin")
                 VALUES (:email, :password, :isAdmin)
             ');
 
@@ -40,20 +40,21 @@ class UserRepository extends Repository {
     public function getUser(string $email): ?User {
         $connection = $this->database->connect();
         $stmt = $connection->prepare('
-            SELECT * FROM "User" WHERE "email" = :email
+            SELECT * FROM "User" WHERE "Email" = :email
         ');
         $stmt->bindParam(':email', $email, PDO::PARAM_STR);
         $stmt->execute();
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user == false) {
+        if($user == false) {
             return null;
         }
+
         return new User(
             $user['UserID'],
             $user['Email'],
             $user['Password'],
-            $user['IsAdmin']
+            $user['isAdmin']
         );
     }
 }

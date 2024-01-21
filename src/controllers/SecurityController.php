@@ -8,6 +8,7 @@ require_once __DIR__.'/../repositories/UserDataRepository.php';
 
 class SecurityController extends AppController {
     public function login() {
+        session_start();
         $userRepository = new UserRepository();
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -56,11 +57,17 @@ class SecurityController extends AppController {
             $name = $_POST['name'];
             $surname = $_POST['surname'];
             $telephone = $_POST['telephone'];
-            $studentCardID = $_POST['studentCardID'];
+            $studentCardID = $_POST['studentCard'];
     
             $userRepository = new UserRepository();
             $userDataRepository = new UserDataRepository();
-    
+
+            $user = $userRepository->getUser($email);
+
+            if($user) {
+                return $this->render("register", ['messages' => ['User with this email exists!']]);
+            }
+            
             $userID = $userRepository->addUser($email, password_hash($password, PASSWORD_DEFAULT));
             $userDataRepository->addUserData($userID, $name, $surname, $telephone, $studentCardID);
         } catch (PDOException $e) {
@@ -68,6 +75,6 @@ class SecurityController extends AppController {
         }
 
         $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/login");
+        header("Location: {$url}/registerPage");
     }
 }

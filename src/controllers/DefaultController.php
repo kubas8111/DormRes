@@ -11,14 +11,15 @@ require_once __DIR__.'/../repositories/ReservationRepository.php';
 class DefaultController extends AppController {
 
     public function main() {
-        if(isset($_SESSION['id']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['id']) {
+        session_start();
+        if(isset($_SESSION['UserId']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['UserId']) {
             $this->render('main');
         } else {
             $this->render('login');
         }
     }
 
-    public function login() {
+    public function loginPage() {
         if(isset($_SESSION['id']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['id']) {
             $this->render('main');
         } else {
@@ -50,7 +51,7 @@ class DefaultController extends AppController {
         }
     }
 
-    public function register() {
+    public function registerPage() {
         $this->render('register');
     }
 
@@ -67,11 +68,27 @@ class DefaultController extends AppController {
         // $roomRepository->addRoom("DUPA2", 7, 1, 3);
         // $roomRepository->addRoom("DUPA3", 7, 2, 3);
         // $roomRepository->deleteRoom(341);
-        $dormitoryRepository->deleteDormitory(10);
-        $dormitoryRepository->deleteDormitory(11);
+        // $dormitoryRepository->deleteDormitory(10);
+        // $dormitoryRepository->deleteDormitory(11);
         // $last = $dormitoryRepository->getDormitory(11);
+
+        $passwords = [
+            'password1', 'password2', 'password3', 'password4', 'password5',
+            'password6', 'password7', 'password8', 'password9', 'password10',
+            'password11', 'password12', 'password13', 'password14', 'password15',
+            'password16', 'password17', 'password18', 'password19', 'password20'
+        ];
+        
+        $hashedPasswords = [];
+        
+        foreach ($passwords as $password) {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $hashedPasswords[] = $hashedPassword;
+        }
+        
         session_start();
         
+        $_SESSION['hashedPasswords'] = $hashedPasswords;
         $rooms = $dormitoryRepository->getDormitories();
         
         $_SESSION['code'] = $rooms;

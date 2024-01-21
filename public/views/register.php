@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="login page">
+    <meta name="description" content="register page">
     <meta name="keywords" content="logowanie">
     <meta name="author" content="Jakub Swies">
     <link rel="stylesheet" type="text/css" href="public/css/style_register.css">
@@ -24,7 +24,6 @@
                     ?>
                 </div>
                 <input name="email" type="email" placeholder="Email">
-                <input name="login" type="text" placeholder="Login">
                 <input name="password" type="password" placeholder="Hasło">
                 <input name="name" type="text" placeholder="Imię">
                 <input name="surname" type="text" placeholder="Nazwisko">
