@@ -324,3 +324,38 @@ CREATE TRIGGER set_reservation_time_trigger
 BEFORE INSERT ON "Reservation"
 FOR EACH ROW
 EXECUTE FUNCTION set_reservation_time();
+
+CREATE VIEW "UserDetails" AS
+SELECT
+    U."UserID",
+    U."Email",
+    D."Name",
+    D."Surname",
+    D."Telephone",
+    D."StudentCardID"
+FROM
+    "User" U
+JOIN
+    "UserData" D ON U."UserID" = D."UserID";
+
+CREATE VIEW "ReservationDetails" AS
+SELECT
+    R."ReservationID",
+    U."UserID",
+    U."Email",
+    D."Name",
+    D."Surname",
+    D."Telephone",
+    D."StudentCardID",
+    RO."Roomcode",
+    DOM."Address"
+FROM
+    "Reservation" R
+JOIN
+    "User" U ON R."UserID" = U."UserID"
+JOIN
+    "UserData" D ON R."UserID" = D."UserID"
+JOIN
+    "Room" RO ON R."RoomID" = RO."RoomID"
+JOIN
+    "Dormitory" DOM ON RO."DormitoryID" = DOM."DormitoryID";
