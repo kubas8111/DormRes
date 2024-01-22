@@ -44,9 +44,32 @@
                 <h2>
                     Rezerwacje
                 </h2>
-                <p>
-                    hujhujhujhuhjhujhhuhjuhjhuhhuhjh uhjhh uh jhu huhj huhjh uh jh uhj
-                </p>
+                <?php
+                $reservationRepository = new ReservationRepository();
+                $reservations = $reservationRepository->getReservationView();
+
+                if($reservations) { 
+                    echo '<table style="font-size:14px">';
+                    echo '<tr>';
+                    foreach($reservations[0] as $key => $value) {
+                      echo '<th>' . $key . '</th>';
+                    }
+                    echo '</tr>';
+                  
+                    foreach($reservations as $reservation) {
+                      echo '<tr>';
+                      foreach ($reservation as $value) {
+                        echo '<td>' . $value . '</td>';
+                      }
+                      echo '</tr>';
+                    }
+                  
+                    echo '</table>';
+                  } else {
+                    echo 'Brak danych do wyświetlenia.';
+                  }
+
+                ?>
             </section>
         </main>
     </div>

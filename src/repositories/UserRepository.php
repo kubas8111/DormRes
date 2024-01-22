@@ -57,4 +57,19 @@ class UserRepository extends Repository {
             $user['isAdmin']
         );
     }
+
+    public function getUserView(): ?array {
+        $connection = $this->database->connect();
+        $stmt = $connection->prepare('
+            SELECT * FROM "UserDetails"
+        ');
+        $stmt->execute();
+
+        $reservation = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if($reservation === false) {
+            return null;
+        }
+        
+        return $reservation;
+    }
 }

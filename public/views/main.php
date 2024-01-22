@@ -42,11 +42,36 @@
         <main>
             <section class="container">
                 <h2>
-                    Informacje
+                    Informacje o akademikach
                 </h2>
-                <p>
-                    hujhujhujhuhjhujhhuhjuhjhuhhuhjh uhjhh uh jhu huhj huhjh uh jh uhj
-                </p>
+                <?php
+                $dormitoryRepository = new DormitoryRepository();
+                $dormitories = $dormitoryRepository->getDormitories();
+
+                if(!empty($dormitories)) {
+                    echo '<table>';
+                    echo '<tr>';
+                    echo '<th>Address</th>';
+                    echo '<th>City</th>';
+                    echo '<th>Postcode</th>';
+                    echo '<th>Telephone</th>';
+                    echo '</tr>';
+                
+                    foreach($dormitories as $dormitory) {
+                    echo '<tr>';
+                    echo '<td>' . $dormitory['Address'] . '</td>';
+                    echo '<td>' . $dormitory['City'] . '</td>';
+                    echo '<td>' . $dormitory['Postcode'] . '</td>';
+                    echo '<td>' . $dormitory['Telephone'] . '</td>';
+                    echo '</tr>';
+                    }
+                
+                    echo '</table>';
+                } else {
+                    echo 'Brak danych do wyświetlenia.';
+                }
+
+                ?>
             </section>
         </main>
     </div>

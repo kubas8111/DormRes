@@ -44,9 +44,32 @@
                 <h2>
                     Użytkownicy
                 </h2>
-                <p>
-                    hujhujhujhuhjhujhhuhjuhjhuhhuhjh uhjhh uh jhu huhj huhjh uh jh uhj
-                </p>
+                <?php
+                $userRepository = new UserRepository();
+                $users = $userRepository->getUserView();
+
+                if($users) { 
+                    echo '<table>';
+                    echo '<tr>';
+                    foreach($users[0] as $key => $value) {
+                      echo '<th>' . $key . '</th>';
+                    }
+                    echo '</tr>';
+                  
+                    foreach($users as $user) {
+                      echo '<tr>';
+                      foreach ($user as $value) {
+                        echo '<td>' . $value . '</td>';
+                      }
+                      echo '</tr>';
+                    }
+                  
+                    echo '</table>';
+                  } else {
+                    echo 'Brak danych do wyświetlenia.';
+                  }
+
+                ?>
             </section>
         </main>
     </div>

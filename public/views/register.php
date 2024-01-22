@@ -23,17 +23,20 @@
                     }
                     ?>
                 </div>
-                <input name="email" type="email" placeholder="Email">
-                <input name="password" type="password" placeholder="Hasło">
-                <input name="name" type="text" placeholder="Imię">
-                <input name="surname" type="text" placeholder="Nazwisko">
-                <input name="telephone" type="tel" placeholder="Telefon">
-                <input name="studentCard" type="number" placeholder="Numer karty studenta">
+                <input name="email" type="email" placeholder="Email" required>
+                <input name="password" type="password" placeholder="Hasło" required>
+                <input name="name" type="text" placeholder="Imię" required>
+                <input name="surname" type="text" placeholder="Nazwisko" required>
+                <input name="telephone" type="tel" placeholder="Telefon" required>
+                <input name="studentCard" type="number" placeholder="Numer karty studenta" required>
                 <button>REGISTER</button>
+                
             </form>
-            <div class="registration">
-                <input type="submit" id="loginPage" formaction="loginPage" value="Masz już konto? Zaloguj się">
-            </div>
+            <form>
+                <div class="registration">
+                    <input type="submit" id="loginPage" formaction="loginPage" value="Masz już konto? Zaloguj się">
+                </div>
+            </form>
         </div>
     </div>
 </body>

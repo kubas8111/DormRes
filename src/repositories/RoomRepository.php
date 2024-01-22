@@ -96,17 +96,17 @@ class RoomRepository extends Repository {
 
         $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $result = [];
-        foreach ($rooms as $room) {
-            $result[] = new Room(
-                $room['RoomID'],
-                $room['Roomcode'],
-                $room['DormitoryID'],
-                $room['Type'],
-                $room['Floor']
-            );
-        }
+        // $result = [];
+        // foreach($rooms as $room) {
+        //     $result[] = new Room(
+        //         $room['RoomID'],
+        //         $room['Roomcode'],
+        //         $room['DormitoryID'],
+        //         $room['Type'],
+        //         $room['Floor']
+        //     );
+        // }
 
-        return $result;
+        return $rooms;
     }
 }

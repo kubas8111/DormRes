@@ -95,17 +95,17 @@ class DormitoryRepository extends Repository {
 
         $dormitories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        $result = [];
-        foreach ($dormitories as $dormitory) {
-            $result[] = new Dormitory(
-                $dormitory['DormitoryID'],
-                $dormitory['Address'],
-                $dormitory['City'],
-                $dormitory['Postcode'],
-                $dormitory['Telephone']
-            );
-        }
+        // $result = [];
+        // foreach ($dormitories as $dormitory) {
+        //     $result[] = new Dormitory(
+        //         $dormitory['DormitoryID'],
+        //         $dormitory['Address'],
+        //         $dormitory['City'],
+        //         $dormitory['Postcode'],
+        //         $dormitory['Telephone']
+        //     );
+        // }
 
-        return $result;
+        return $dormitories;
     }
 }

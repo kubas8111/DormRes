@@ -3,6 +3,9 @@
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/style_main.css">
     <title>LOGIN PAGE</title>
+
+    <script src="public/js/pokoje.js"></script>
+    <script src="public/js/rezerwacja.js"></script>
 </head>
 
 <body>
@@ -41,13 +44,47 @@
         </nav>
         <main>
             <section class="container">
-                <h2>
-                    Zarezerwuj
-                </h2>
-                <p>
-                    hujhujhujhuhjhujhhuhjuhjhuhhuhjh uhjhh uh jhu huhj huhjh uh jh uhj
-                </p>
+                <?php
+                $reservationRepository = new ReservationRepository();
+                $reservation = $reservationRepository->getReservationDetailsByUserID((int) $_SESSION['UserId']);
+
+                if(!$reservation) {
+                    echo '<form method="post">';
+                    echo '
+                        <h2>
+                            Zarezerwuj
+                        </h2>';
+                    
+                    $dormitoryRepository = new DormitoryRepository();
+                    $dormitories = $dormitoryRepository->getDormitories();
+
+                    echo '<label>Akademik: <select name="dormitory" id="dormitory" required>';
+                    echo '<option disabled selected value="">Wybierz akademik...</option>';
+                    foreach($dormitories as $dormitory) {
+                        echo '<option value ="'.$dormitory['DormitoryID'].'">';
+                        echo $dormitory['Address'];
+                        echo '</option>';
+                    }
+                    echo '</select></label>';
+                    
+                    echo '<br>';
+                    
+                    echo '
+                        <label>Pokoje: 
+                            <select name="room" id="room" disabled required>
+                            </select>
+                        </label>
+                        <br>
+                    
+                        <input formaction="addReservation" type="submit" value="Zarezerwuj">
+                    </form>';
+                }
+                else {
+                    echo '<h2>Już masz zarezerwowany pokój!</h2>';
+                }
+                ?>
             </section>
         </main>
     </div>
 </body>
+

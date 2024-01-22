@@ -23,10 +23,11 @@
                     }
                     ?>
                 </div>
-                <input name="email" type="text" placeholder="email">
-                <input name="password" type="password" placeholder="password">
+                <input name="email" type="text" placeholder="email" required>
+                <input name="password" type="password" placeholder="password" required>
                 <button>LOGIN</button>
-
+            </form>
+            <form>
                 <div class="registration">
                     <input type="submit" id="registerPage" formaction="registerPage" value="Nie masz konta? Zarejestruj się">
                 </div>

@@ -44,9 +44,25 @@
                 <h2>
                     Twoja rezerwacja
                 </h2>
-                <p>
-                    hujhujhujhuhjhujhhuhjuhjhuhhuhjh uhjhh uh jhu huhj huhjh uh jh uhj
-                </p>
+                
+                <?php
+                    $reservationRepository = new ReservationRepository();
+                    $reservation = $reservationRepository->getReservationDetailsByUserID((int) $_SESSION['UserId']);
+                    // var_dump($reservation);
+
+                    if($reservation) {
+                        echo 'Twoja rezerwacja została złożona: '.$reservation['formattedtime'];
+                        echo '<br>Akademik przy '.$reservation['dormitoryname'];
+                        echo '<br>Pokój numer: '.$reservation['Roomcode'];
+                        echo '
+                            <form method="post">
+                                <input type="submit" formaction="cancelReservation" value="Zrezygnuj z rezerwacji">
+                            </form>';
+                    }
+                    else {
+                        echo 'Nie zarezerwowałeś jeszcze pokoju';
+                    }
+                ?>
             </section>
         </main>
     </div>

@@ -10,8 +10,7 @@ class ReservationController extends AppController {
     public function addReservation() {
         session_start();
 
-        $dormitoryID = $_POST['dormitoryID'];
-        $roomID = $_POST['roomID'];
+        $roomID = (int) $_POST['room'];
 
         if(!isset($_SESSION['UserID'])) {
             $url = "http://$_SERVER[HTTP_HOST]";
@@ -20,13 +19,6 @@ class ReservationController extends AppController {
         }
 
         $userID = $_SESSION['UserID'];
-
-        $roomRepository = new RoomRepository();
-        $availableRooms = $roomRepository->getAvailableRooms($dormitoryID);
-
-        if(!in_array($roomID, $availableRooms)) {
-            return $this->render("reservation", ['messages' => ['Selected room is not available']]);
-        }
 
         $reservationRepository = new ReservationRepository();
         $reservationRepository->addReservation($userID, $roomID);
@@ -45,7 +37,7 @@ class ReservationController extends AppController {
             $reservationRepository->deleteReservation($userID);
 
             $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/main");
+            header("Location: {$url}/reservation");
 
         } catch (Exception $e) {
             die("Error: " . $e->getMessage());
@@ -53,16 +45,13 @@ class ReservationController extends AppController {
     }
 
     public function fetchAvailableRooms() {
-        $dormitoryID = $_GET['dormitoryID'];
+        $dormitoryID = $_POST['dormitoryID'];
     
         $roomRepository = new RoomRepository();
         $availableRooms = $roomRepository->getAvailableRooms($dormitoryID);
-    
-        $options = '';
-        foreach ($availableRooms as $room) {
-          $options .= '<option value="' . $room->getRoomID() . '">' . $room->getRoomCode() . '</option>';
-        }
-    
-        echo $options;
-      }
+
+        //$response = ["message" => "success", "rooms" => $availableRooms];
+
+        echo json_encode($availableRooms);
+    }
 }

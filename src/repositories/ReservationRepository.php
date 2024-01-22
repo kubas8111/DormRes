@@ -67,23 +67,26 @@ class ReservationRepository extends Repository {
             return null;
         }
 
-        return new Reservation(
-            $reservation['ReservationID'],
-            $reservation['UserID'],
-            $reservation['RoomID'],
-            $reservation['Time']
-        );
+        return $reservation;
+        // return new Reservation(
+        //     $reservation['ReservationID'],
+        //     $reservation['UserID'],
+        //     $reservation['RoomID'],
+        //     $reservation['Time']
+        // );
     }
 
     public function getReservationDetailsByUserID(int $userID): ?array {
         $connection = $this->database->connect();
         $stmt = $connection->prepare('
-            SELECT R."Time", Ro."RoomCode", D."Name" as DormitoryName
+            SELECT TO_CHAR(R."Time", \'YYYY-MM-DD HH24:MI:SS\') as FormattedTime,
+            Ro."Roomcode",
+            D."Address" as DormitoryName
             FROM "Reservation" R
-            JOIN "Room" Ro ON R."RoomID" = Ro."RoomID"
-            JOIN "Dormitory" D ON Ro."DormitoryID" = D."DormitoryID"
+                JOIN "Room" Ro ON R."RoomID" = Ro."RoomID"
+                JOIN "Dormitory" D ON Ro."DormitoryID" = D."DormitoryID"
             WHERE R."UserID" = :userID
-            LIMIT 1
+            LIMIT 1;
         ');
         $stmt->bindParam(':userID', $userID, PDO::PARAM_INT);
         $stmt->execute();
@@ -94,5 +97,20 @@ class ReservationRepository extends Repository {
         }
 
         return $details;
+    }
+
+    public function getReservationView(): ?array {
+        $connection = $this->database->connect();
+        $stmt = $connection->prepare('
+            SELECT * FROM "ReservationDetails"
+        ');
+        $stmt->execute();
+
+        $reservation = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if($reservation === false) {
+            return null;
+        }
+        
+        return $reservation;
     }
 }
