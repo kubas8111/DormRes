@@ -10,12 +10,12 @@ class ReservationController extends AppController {
     public function addReservation() {
         session_start();
 
-        $dormitoryID = $_POST['dormitoryID'] ?? 0;
-        $roomID = $_POST['roomID'] ?? 0;
+        $dormitoryID = $_POST['dormitoryID'];
+        $roomID = $_POST['roomID'];
 
         if(!isset($_SESSION['UserID'])) {
             $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/login");
+            header("Location: {$url}/loginPage");
             exit();
         }
 
@@ -32,7 +32,7 @@ class ReservationController extends AppController {
         $reservationRepository->addReservation($userID, $roomID);
 
         $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/main");
+        header("Location: {$url}/reservation");
     }
 
     public function cancelReservation() {

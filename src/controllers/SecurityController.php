@@ -6,6 +6,8 @@ require_once __DIR__.'/../repositories/UserRepository.php';
 require_once __DIR__.'/../models/UserData.php';
 require_once __DIR__.'/../repositories/UserDataRepository.php';
 
+session_start();
+
 class SecurityController extends AppController {
     public function login() {
         session_start();
@@ -43,7 +45,7 @@ class SecurityController extends AppController {
         
         if($user->getIsAdmin()) {
             $url = "http://$_SERVER[HTTP_HOST]";
-            header("Location: {$url}/main");
+            header("Location: {$url}/mainAdmin");
         } else {
             $url = "http://$_SERVER[HTTP_HOST]";
             header("Location: {$url}/main");
@@ -75,6 +77,6 @@ class SecurityController extends AppController {
         }
 
         $url = "http://$_SERVER[HTTP_HOST]";
-        header("Location: {$url}/registerPage");
+        header("Location: {$url}/loginPage");
     }
 }

@@ -32,7 +32,7 @@
                 <button>REGISTER</button>
             </form>
             <div class="registration">
-                <a href="login.php">Masz już konto? Zaloguj się</a>
+                <input id="loginPage" formaction="loginPage" value="Masz już konto? Zaloguj się">
             </div>
         </div>
     </div>

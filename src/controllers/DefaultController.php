@@ -11,11 +11,10 @@ require_once __DIR__.'/../repositories/ReservationRepository.php';
 class DefaultController extends AppController {
 
     public function main() {
-        session_start();
         if(isset($_SESSION['UserId']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['UserId']) {
             $this->render('main');
         } else {
-            $this->render('login');
+            $this->render('loginPage');
         }
     }
 
@@ -23,7 +22,7 @@ class DefaultController extends AppController {
         if(isset($_SESSION['id']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['id']) {
             $this->render('main');
         } else {
-            $this->render('login');
+            $this->render('loginPage');
         }
     }
 
@@ -31,7 +30,7 @@ class DefaultController extends AppController {
         if(isset($_SESSION['id']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['id']) {
             $this->render('information');
         } else {
-            $this->render('login');
+            $this->render('loginPage');
         }
     }
 
@@ -39,7 +38,7 @@ class DefaultController extends AppController {
         if(isset($_SESSION['id']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['id']) {
             $this->render('reserve');
         } else {
-            $this->render('login');
+            $this->render('loginPage');
         }
     }
 
@@ -47,12 +46,18 @@ class DefaultController extends AppController {
         if(isset($_SESSION['id']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['id']) {
             $this->render('reservation');
         } else {
-            $this->render('login');
+            $this->render('loginPage');
         }
     }
 
     public function registerPage() {
         $this->render('register');
+    }
+
+    public function logout() {
+        session_destroy();
+        setcookie("id", "", time() - 3600, "/");
+        $this->render("loginPage");
     }
 
     public function test() {

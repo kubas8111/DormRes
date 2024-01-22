@@ -2,7 +2,7 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="public/css/style_main.css">
-    <title>LOGIN PAGE</title>
+    <title>main</title>
 </head>
 
 <body>
@@ -15,10 +15,10 @@
                 <form id="menu" method="get">
                 <ul>
                     <li>
-                        <input formaction="reserve" type="submit" value="Zarezerwuj pokój" class="center">
+                        <input formaction="reservationList" type="submit" value="Lista rezerwacji" class="center">
                     </li>
                     <li>
-                        <input formaction="reservation" type="submit" value="Pokaż rezerwację" class="center">
+                        <input formaction="users" type="submit" value="Lista użytkowników" class="center">
                     </li>
                     <li>
                         <input formaction="information" type="submit" value="Informacje o akademikach" class="center">

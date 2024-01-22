@@ -26,10 +26,11 @@
                 <input name="email" type="text" placeholder="email">
                 <input name="password" type="password" placeholder="password">
                 <button>LOGIN</button>
+
+                <div class="registration">
+                    <input id="registerPage" formaction="registerPage" value="Nie masz konta? Zarejestruj się">
+                </div>
             </form>
-            <div class="registration">
-                <a href="register.php">Nie masz konta? Zarejestruj się</a>
-            </div>
         </div>
     </div>
 </body>
