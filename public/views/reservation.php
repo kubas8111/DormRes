@@ -12,38 +12,37 @@
                 <img src="public/img/logo.svg">
             </div>
             <div class="list">
+                <form id="menu" method="get">
                 <ul>
-                    <a href="reserve.html" class="center">
-                        <li>
-                            Zarezerwuj pokój
-                        </li>
-                    </a>
-                    <a href="reservation.html" class="center">
-                        <li>
-                            Pokaż rezerwację
-                        </li>
-                    </a>
-                    <a href="information.html" class="center">
-                        <li>
-                            Informacje o akademikach
-                        </li>
-                    </a>
+                    <li>
+                        <input formaction="reserve" type="submit" value="Zarezerwuj pokój" class="center">
+                    </li>
+                    <li>
+                        <input formaction="reservation" type="submit" value="Pokaż rezerwację" class="center">
+                    </li>
+                    <li>
+                        <input formaction="main" type="submit" value="Informacje o akademikach" class="center">
+                    </li>
                 </ul>
             </div>
             <div class="account">
                 <div class="user">
                     <img src="public/img/user.png">
-                    <p>Witaj [name]</p>
+                    <?php
+                        echo '<p>Witaj '.$_SESSION['Name'].'</p>';
+                    ?>
                 </div>
                 <div class="logout">
-                    <button>Wyloguj</button>
+                    <form method="get">
+                        <input type="submit" value="Wyloguj" formaction="logout">
+                    </form>
                 </div>
             </div>
         </nav>
         <main>
             <section class="container">
                 <h2>
-                    Informacje
+                    Twoja rezerwacja
                 </h2>
                 <p>
                     hujhujhujhuhjhujhhuhjuhjhuhhuhjh uhjhh uh jhu huhj huhjh uh jh uhj

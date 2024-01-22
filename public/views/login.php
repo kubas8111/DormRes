@@ -28,7 +28,7 @@
                 <button>LOGIN</button>
 
                 <div class="registration">
-                    <input id="registerPage" formaction="registerPage" value="Nie masz konta? Zarejestruj się">
+                    <input type="submit" id="registerPage" formaction="registerPage" value="Nie masz konta? Zarejestruj się">
                 </div>
             </form>
         </div>

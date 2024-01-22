@@ -32,7 +32,7 @@
                 <button>REGISTER</button>
             </form>
             <div class="registration">
-                <input id="loginPage" formaction="loginPage" value="Masz już konto? Zaloguj się">
+                <input type="submit" id="loginPage" formaction="loginPage" value="Masz już konto? Zaloguj się">
             </div>
         </div>
     </div>

@@ -21,7 +21,7 @@
                         <input formaction="users" type="submit" value="Lista użytkowników" class="center">
                     </li>
                     <li>
-                        <input formaction="information" type="submit" value="Informacje o akademikach" class="center">
+                        <input formaction="mainAdmin" type="submit" value="Informacje o akademikach" class="center">
                     </li>
                 </ul>
             </div>

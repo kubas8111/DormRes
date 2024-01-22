@@ -107,21 +107,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Reservation"
     OWNER to root;
 
-
--- View UserDetailsView
-
-CREATE VIEW UserDetailsView AS
-SELECT 
-    U.UserID, 
-    U.Email, 
-    UD.Name,
-    UD.Surname,
-    UD.Telephone,
-    UD.StudentCardID
-FROM "User" U
-JOIN UserData UD ON U.UserID = UD.UserID
-WHERE U.isAdmin = false;
-
 -- DODAWANIE AKADEMIKOW
 
 INSERT INTO "Dormitory" ("Address", "City", "Postcode", "Telephone")
@@ -312,7 +297,7 @@ VALUES
 -- Tworzenie użytkowników
 
 -- Dodanie 25 użytkowników do tabeli User
-INSERT INTO "User" ("Email", "Password", "IsAdmin") VALUES
+INSERT INTO "User" ("Email", "Password", "isAdmin") VALUES
 ('adam.kowalski@example.com', '$2y$10$8HJBzTelRHcRAkXvnl1O.OTCAKl/BoPJG0Xu/2fJjg4G24eLHOuBK', false),
 ('ewa.nowak@example.com', '$2y$10$5xpohs2X5AGjY2XUJxR8l.m9ORRYnj2YfiaRbbvVhfLZQ4a4hr04a', false),
 ('jan.majewski@example.com', '$2y$10$40Qx4XJ896HJvkpBjGiEFeF15UjxPJg3RWHEJAVVWgP2ABlsz9yJO', false),
@@ -335,29 +320,27 @@ INSERT INTO "User" ("Email", "Password", "IsAdmin") VALUES
 ('kamila.kubiak@example.com', '$2y$10$IBCXQJe9gHn9DjbMDJbl0u/PWQLjLvsShBWatWSNstl7S2obSzVxC', false)
 
 INSERT INTO "UserData" ("UserID", "Name", "Surname", "Telephone", "StudentCardID") VALUES
-(10, 'John', 'Doe', '+48 123 456 789', 'ABC123456'),
-(11, 'Jane', 'Smith', '+48 987 654 321', 'DEF789012'),
-(12, 'Michael', 'Johnson', '+48 555 123 789', 'GHI345678'),
-(13, 'Emily', 'Brown', '+48 111 222 333', 'JKL901234'),
-(14, 'Daniel', 'Wilson', '+48 999 888 777', 'MNO567890'),
-(15, 'Olivia', 'Taylor', '+48 333 444 555', 'PQR123456'),
-(16, 'Matthew', 'Anderson', '+48 666 777 888', 'STU789012'),
-(17, 'Sophia', 'Thomas', '+48 111 222 333', 'VWX345678'),
-(18, 'Aiden', 'Hill', '+48 444 555 666', 'YZA901234'),
-(19, 'Grace', 'Baker', '+48 777 888 999', 'BCD567890'),
-(20, 'Ethan', 'Miller', '+48 222 333 444', 'EFG123456'),
-(21, 'Emma', 'Davis', '+48 555 666 777', 'HIJ789012'),
-(22, 'Noah', 'Garcia', '+48 999 888 777', 'KLM345678'),
-(23, 'Isabella', 'Martinez', '+48 333 444 555', 'NOP901234'),
-(24, 'Liam', 'Lopez', '+48 666 777 888', 'QRS567890'),
-(25, 'Mia', 'Harris', '+48 111 222 333', 'TUV123456'),
-(26, 'Lucas', 'Clark', '+48 444 555 666', 'WXY789012'),
-(27, 'Ava', 'Allen', '+48 777 888 999', 'ZAB345678'),
-(28, 'Logan', 'Wright', '+48 222 333 444', 'CDE123456'),
-(29, 'Ella', 'Adams', '+48 555 666 777', 'FGH789012');
+(4, 'John', 'Doe', '+48 123 456 789', 'ABC123456'),
+(5, 'Jane', 'Smith', '+48 987 654 321', 'DEF789012'),
+(6, 'Michael', 'Johnson', '+48 555 123 789', 'GHI345678'),
+(7, 'Emily', 'Brown', '+48 111 222 333', 'JKL901234'),
+(8, 'Daniel', 'Wilson', '+48 999 888 777', 'MNO567890'),
+(9, 'Olivia', 'Taylor', '+48 333 444 555', 'PQR123456'),
+(10, 'Matthew', 'Anderson', '+48 666 777 888', 'STU789012'),
+(11, 'Sophia', 'Thomas', '+48 111 222 333', 'VWX345678'),
+(12, 'Aiden', 'Hill', '+48 444 555 666', 'YZA901234'),
+(13, 'Grace', 'Baker', '+48 777 888 999', 'BCD567890'),
+(14, 'Ethan', 'Miller', '+48 222 333 444', 'EFG123456'),
+(15, 'Emma', 'Davis', '+48 555 666 777', 'HIJ789012'),
+(16, 'Noah', 'Garcia', '+48 999 888 777', 'KLM345678'),
+(17, 'Isabella', 'Martinez', '+48 333 444 555', 'NOP901234'),
+(18, 'Liam', 'Lopez', '+48 666 777 888', 'QRS567890'),
+(19, 'Mia', 'Harris', '+48 111 222 333', 'TUV123456'),
+(20, 'Lucas', 'Clark', '+48 444 555 666', 'WXY789012'),
+(21, 'Ava', 'Allen', '+48 777 888 999', 'ZAB345678'),
+(22, 'Logan', 'Wright', '+48 222 333 444', 'CDE123456'),
+(23, 'Ella', 'Adams', '+48 555 666 777', 'FGH789012');
 
-INSERT INTO "Reservation" ("UserID", "RoomID")
-SELECT generate_series(10, 29) AS "UserID", generate_series(4, 23) AS "RoomID";
 
 -- Tworzenie funkcji
 CREATE OR REPLACE FUNCTION set_reservation_time()
@@ -373,6 +356,11 @@ CREATE TRIGGER set_reservation_time_trigger
 BEFORE INSERT ON "Reservation"
 FOR EACH ROW
 EXECUTE FUNCTION set_reservation_time();
+
+-- Dodanie rezerwacji
+
+INSERT INTO "Reservation" ("UserID", "RoomID")
+SELECT generate_series(4, 23) AS "UserID", generate_series(4, 23) AS "RoomID";
 
 -- Tworzenie widoków
 

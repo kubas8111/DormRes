@@ -8,45 +8,46 @@ require_once __DIR__.'/../repositories/UserRepository.php';
 require_once __DIR__.'/../repositories/UserDataRepository.php';
 require_once __DIR__.'/../repositories/ReservationRepository.php';
 
-class DefaultController extends AppController {
+session_start();
 
+class DefaultController extends AppController {
     public function main() {
         if(isset($_SESSION['UserId']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['UserId']) {
             $this->render('main');
         } else {
-            $this->render('loginPage');
+            $this->render('login');
         }
     }
 
     public function loginPage() {
-        if(isset($_SESSION['id']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['id']) {
+        if(isset($_SESSION['UserId']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['UserId']) {
             $this->render('main');
         } else {
-            $this->render('loginPage');
+            $this->render('login');
         }
     }
 
-    public function information() {
-        if(isset($_SESSION['id']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['id']) {
-            $this->render('information');
-        } else {
-            $this->render('loginPage');
-        }
-    }
+    // public function information() {
+    //     if(isset($_SESSION['UserId']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['UserId']) {
+    //         $this->render('information');
+    //     } else {
+    //         $this->render('login');
+    //     }
+    // }
 
     public function reserve() {
-        if(isset($_SESSION['id']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['id']) {
+        if(isset($_SESSION['UserId']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['UserId']) {
             $this->render('reserve');
         } else {
-            $this->render('loginPage');
+            $this->render('login');
         }
     }
 
     public function reservation() {
-        if(isset($_SESSION['id']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['id']) {
+        if(isset($_SESSION['UserId']) && isset($_COOKIE['id']) && $_COOKIE['id'] == $_SESSION['UserId']) {
             $this->render('reservation');
         } else {
-            $this->render('loginPage');
+            $this->render('login');
         }
     }
 
@@ -57,7 +58,7 @@ class DefaultController extends AppController {
     public function logout() {
         session_destroy();
         setcookie("id", "", time() - 3600, "/");
-        $this->render("loginPage");
+        $this->render("login");
     }
 
     public function test() {

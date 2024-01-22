@@ -9,7 +9,7 @@ Router::get('', 'DefaultController');
 Router::get('loginPage', 'DefaultController');
 Router::get('registerPage', 'DefaultController');
 Router::get('reservation', 'DefaultController');
-Router::get('information', 'DefaultController');
+// Router::get('information', 'DefaultController');
 Router::get('reserve', 'DefaultController');
 Router::get('main', 'DefaultController');
 Router::get('logout', 'DefaultController');

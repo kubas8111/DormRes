@@ -21,7 +21,7 @@
                         <input formaction="reservation" type="submit" value="Pokaż rezerwację" class="center">
                     </li>
                     <li>
-                        <input formaction="information" type="submit" value="Informacje o akademikach" class="center">
+                        <input formaction="main" type="submit" value="Informacje o akademikach" class="center">
                     </li>
                 </ul>
             </div>
