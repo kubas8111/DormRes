@@ -1,33 +1,46 @@
-# Dorm Res
+# Dorm Res Readme
 
-This project is about selecting a dormitory, and then booking a room in it.
+## Introduction
 
-## Table of contents
+Welcome to the Dormitory Room Reservation System, a robust web application designed to streamline the process of reserving rooms in university dormitories. Built using Docker containers, PostgreSQL as the database management system, and featuring a well-defined Entity-Relationship Diagram (ERD), this system ensures a seamless and efficient experience for both users and administrators.
 
-- Requirements
-- Installation
-- Configuration
-- Maintainers
+## Docker Containers
 
+In the Dormitory Room Reservation System project, we utilize several Docker containers to provide a comprehensive runtime environment.
 
-## Requirements
+1. **nginx:** Container containing the Nginx HTTP server, responsible for serving static files and acting as a reverse proxy for the PHP application.
 
-This module requires the following modules:
-- PHP server, for example Apache
-- Database server, for example MySQL.
-- or you can also use Docker container for everything
+2. **php:** Container housing the PHP interpreter to handle the business logic in our web application.
 
+3. **postgres:** Container holding the PostgreSQL database, used for storing reservation and user data.
 
-## Installation
+4. **pgadmin4:** Container incorporating the pgAdmin 4 tool, allowing for the management of the PostgreSQL database through a graphical interface.
 
-- You can get PHP server and MySQL server installing [XAMPP](https://www.apachefriends.org/pl/index.html)
-- You can download Docker from [here](https://www.docker.com/products/docker-desktop/)
 
 ## Configuration
 
 1. 
 
+## Quick Start
 
-## Maintainers
+1. Clone the Repository:
+  ```bash
+  git clone https://github.com/kubas8111/DormRes.git
+  ```
 
-- Me - [me](https://github.com/kubas8111/DormReservation/edit/main/README.md)
+2.Navigate to the Project Directory:
+  ```bash
+  cd DormRes
+  ```
+
+3. Run Docker Compose:
+  ```bash
+  docker-compose up --build
+  ```
+
+4. Open the Project in Your Browser:
+
+## Dependencies
+
+- Docker
+- Docker Compose
