@@ -10,7 +10,7 @@
 
 <body>
     <div class="base-container">
-        <nav>
+    <nav>
             <div class="logo">
                 <img src="public/img/logo.svg">
             </div>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="logout">
                     <form method="get">
-                        <input type="submit" value="Wyloguj" formaction="logout">
+                        <input type="submit" class="logout-button" value="Wyloguj" formaction="logout">
                     </form>
                 </div>
             </div>
@@ -52,13 +52,13 @@
                     echo '<form method="post">';
                     echo '
                         <h2>
-                            Zarezerwuj
+                            Zarezerwuj pokój
                         </h2>';
                     
                     $dormitoryRepository = new DormitoryRepository();
                     $dormitories = $dormitoryRepository->getDormitories();
 
-                    echo '<label>Akademik: <select name="dormitory" id="dormitory" required>';
+                    echo '<label>Wybierz akademik: <select name="dormitory" id="dormitory" required>';
                     echo '<option disabled selected value="">Wybierz akademik...</option>';
                     foreach($dormitories as $dormitory) {
                         echo '<option value ="'.$dormitory['DormitoryID'].'">';

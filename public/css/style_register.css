@@ -72,6 +72,11 @@ button {
     letter-spacing: 4.8px;
 }
 
+input[type=submit] {
+    height: auto;
+    width: auto;
+}
+
 .registration {
     margin: 20px auto;
 }

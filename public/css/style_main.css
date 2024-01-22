@@ -40,6 +40,10 @@ nav {
     width: 60%;
 }
 
+form {
+    height: 100%;
+}
+
 ul {
     width: 100%;
     height: 100%;
@@ -64,10 +68,19 @@ li {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-a {
-    text-decoration: none;
-    color: white;
+input[type=submit] {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    cursor: pointer;
 }
+
+.logout-button {
+    background: rgba(33, 188, 20, 0.50);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
 
 .account {
     width: 20%;
@@ -106,13 +119,19 @@ a {
 main {
     width: 60vw;
     height: 100%;
-    padding: 1em;
     background: rgba(183, 251, 166, 0.37);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
+select {
+    padding: 10px;
+    border-radius: 10px;
+}
+
 .container {
     text-align: center;
+    overflow: auto;
+    max-height: 90%;
 }
 
 .container select {
@@ -126,4 +145,11 @@ main {
     margin: auto;
     background: linear-gradient(180deg, rgba(217, 255, 199, 0.65) 0%, rgba(183, 255, 149, 0.74) 100%);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+table, td, th {
+    margin: auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px;
 }

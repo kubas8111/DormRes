@@ -34,7 +34,7 @@
                 </div>
                 <div class="logout">
                     <form method="get">
-                        <input type="submit" value="Wyloguj" formaction="logout">
+                        <input type="submit" class="logout-button" value="Wyloguj" formaction="logout">
                     </form>
                 </div>
             </div>
