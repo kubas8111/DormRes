@@ -1,8 +1,15 @@
 <!DOCTYPE html>
+<html lang="pl">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dormitory Room Reservation System - Reserve your room in university dormitories.">
+    <meta name="keywords" content="dormitory, room reservation, university, accommodation">
+    <meta name="author" content="Jakub Święs">
+
+    <title>Dormitory Room Reservation</title>
     <link rel="stylesheet" type="text/css" href="public/css/style_main.css">
-    <title>main</title>
 </head>
 
 <body>
@@ -74,3 +81,4 @@
         </main>
     </div>
 </body>
+</html>
