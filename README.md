@@ -79,6 +79,13 @@ If a user already has a reservation, a message informs them that they cannot mak
 
 ![zarezerwowany](https://github.com/kubas8111/DormRes/assets/80070461/c1912728-d04b-4563-b34f-b60c9b1fe0b3)
 
+### Admin Dashboard
+
+- Upon logging in as an admin, additional options become available in the dashboard.
+
+- Admins can access the "User Management" and "Reservation Overview" pages to view information about users and reservations, respectively.
+
+![lista_uzytkownikow](https://github.com/kubas8111/DormRes/assets/80070461/b64a5d4f-35c1-45a3-8808-27a5449731d8)
 
 ## ERD Diagram
 ![DiagramERD](https://github.com/kubas8111/DormRes/assets/80070461/18e4bb33-b517-41c5-abf3-f932789649c2)
