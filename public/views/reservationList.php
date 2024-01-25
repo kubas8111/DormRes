@@ -56,7 +56,7 @@
                 $reservations = $reservationRepository->getReservationView();
 
                 if($reservations) { 
-                    echo '<table style="font-size:14px">';
+                    echo '<table>';
                     echo '<tr>';
                     foreach($reservations[0] as $key => $value) {
                       echo '<th>' . $key . '</th>';
